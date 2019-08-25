@@ -1,0 +1,74 @@
+syntax = "proto3";
+
+package cloudwalker.srv.transavro;
+
+service Transavro {
+	rpc Call(Request) returns (Response) {}
+	rpc Stream(StreamingRequest) returns (stream StreamingResponse) {}
+	rpc PingPong(stream Ping) returns (stream Pong) {}
+	rpc GetTiles(RequestSpecification) returns (stream MovieTiles){}
+}
+
+message RequestSpecification {
+    string vendor=1;
+    repeated string language=2;
+    repeated string genre=5;
+    repeated string type=3;
+    repeated string source=4;
+}
+
+
+message MovieTiles {
+   string tid = 23;
+   string title = 1;
+   string poster = 2;
+   string portrait = 3;
+   string background = 4;
+   double rating = 5;
+   string runtime = 6;
+  repeated string target = 7;
+   string type = 8;
+   string package = 9;
+   string source = 10;
+  repeated string genre = 11;
+   string year = 12;
+  repeated string director = 13;
+  repeated string cast = 14;
+   string synopsis = 15;
+   string tileType = 16;
+   double startTime = 17;
+   double startIndex = 18;
+   bool useAlternate = 19;
+   string alternateUrl = 20;
+   string playstoreUrl = 21;
+   bool detailPage = 22;
+}
+
+
+message Message {
+	string say = 1;
+}
+
+message Request {
+	string name = 1;
+}
+
+message Response {
+	string msg = 1;
+}
+
+message StreamingRequest {
+	int64 count = 1;
+}
+
+message StreamingResponse {
+	int64 count = 1;
+}
+
+message Ping {
+	int64 stroke = 1;
+}
+
+message Pong {
+	int64 stroke = 1;
+}
